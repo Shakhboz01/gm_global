@@ -27,7 +27,7 @@
           <% unless defined?(shrink) %>
             <td><%= expenditure.payment_type %></td>
           <% end %>
-          <td><%= expenditure.expenditure_type %></td>
+          <td><%= expenditure.expenditure_type&.name %></td>
           <td><%= expenditure.comment %></td>
           <td><%= strf_datetime(expenditure.created_at) %></td>
           <td>

@@ -20,7 +20,6 @@ class ExpendituresController < ApplicationController
 
   # GET /expenditures/new
   def new
-    @expenditure_types = Expenditure.expenditure_types.reject { |key, v| v == 1 }.keys
     @expenditure = Expenditure.new(
       combination_of_local_product_id: params[:combination_of_local_product_id],
       delivery_from_counterparty_id: params[:delivery_from_counterparty_id],
@@ -90,6 +89,10 @@ class ExpendituresController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def expenditure_params
-    params.require(:expenditure).permit(:combination_of_local_product_id, :sale_ids, :price_in_usd, :comment, :image, :delivery_from_counterparty_id, :price, :price_in_usd, :price_in_uzs, :payment_type, :total_paid, :expenditure_type)
+    params.require(:expenditure).permit(
+      :combination_of_local_product_id, :expenditure_type_id, :sale_ids, :price_in_usd,
+      :comment, :image, :delivery_from_counterparty_id, :price, :price_in_usd, :price_in_uzs,
+      :payment_type, :total_paid, :expenditure_type
+    )
   end
 end

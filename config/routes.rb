@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :expenditure_types
   resources :debt_operations
   resources :debt_users
   resources :daily_transaction_reports

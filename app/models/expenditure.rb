@@ -6,12 +6,11 @@ class Expenditure < ApplicationRecord
   attr_accessor :image
 
   belongs_to :user
+  belongs_to :expenditure_type, optional: true
   belongs_to :combination_of_local_product, optional: true
   belongs_to :delivery_from_counterparty, optional: true
   has_many :transaction_histories, dependent: :destroy
-  validates_presence_of :expenditure_type
   validates_presence_of :price
-  enum expenditure_type: %i[Корея qarz банк другие_расходы на_покупку_товаров]
   enum payment_type: %i[наличные карта click другие]
   scope :price_in_uzs, -> { where('price_in_usd = ?', false) }
   scope :price_in_usd, -> { where('price_in_usd = ?', true) }

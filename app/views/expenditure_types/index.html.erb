@@ -1,0 +1,12 @@
+<h1>тип расхода</h1>
+
+<div id="expenditure_types">
+  <% @expenditure_types.each do |expenditure_type| %>
+    <%= render expenditure_type %>
+    <p>
+      <%= link_to "Prosmotr", expenditure_type %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Noviy", new_expenditure_type_path %>
