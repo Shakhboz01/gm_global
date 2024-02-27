@@ -21,6 +21,7 @@
       var selectedProductText = $(this).data('product-name');
       h1Element.textContent = selectedProductText;
       document.querySelector('#product_sell_product_id').value = $(this).data('product-id');
+      document.querySelector('#product_sell_initial_remaining').value = $(this).data('product-remaining');
       calculateSalePrice();
 		});
 
@@ -70,11 +71,16 @@
 
       <%= f.collection_select :product_id, products.order('LOWER(name) ASC'), :id, :name, { include_blank: true }, { hidden: true, class: 'form-select form-control' } %><br>
       <div class='row'>
+        <div class='col-sm-12'>
+          <%= f.input :initial_remaining, label: 'Oстаток', disabled: true %>
+        </div>
+      </div>
+      <div class='row'>
         <div class='col-sm-4'>
-          <%= f.input :amount, label: 'Кол.' %>
+          <%= f.input :amount, label: 'Кол.', input_html: {value: 1} %>
         </div>
         <div class='col-sm-4'>
-          <%= f.input :sell_price, label: 'Цена (1 шт)'%>
+          <%= f.input :sell_price, label: 'Цена (1 шт)' %>
         </div>
         <div class='col-sm-4 align-self-center'>
           <%= f.submit "Добавить &#x1F449;".html_safe, class: 'btn btn-primary' %>

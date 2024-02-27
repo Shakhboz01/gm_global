@@ -3,9 +3,11 @@ require "telegram/bot"
 class SendMessage < ActiveInteraction::Base
   string :message
   string :chat, default: 'tech'
+  boolean :send, default: true
 
   def execute
-    return
+    return unless send
+
     token = ENV["TELEGRAM_TOKEN"]
     bot = Telegram::Bot::Client.new(token)
     chat_id =
