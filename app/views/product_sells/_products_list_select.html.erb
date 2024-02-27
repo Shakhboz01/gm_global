@@ -18,7 +18,7 @@
   }
 </style>
 <script>
-  $(document).ready(function() {
+  $(document).on('turbo:load', function() {
     const productSearchInput = document.getElementById('product_search_input');
     const products = document.querySelectorAll('.product_list');
 

@@ -12,7 +12,7 @@
 }
 </style>
 <script>
-  $(document).ready(function() {
+  $(document).on('turbo:load', function() {
     $("#product_search_input").focus();
     $('.products p').click(function() {
       $('.products p').removeClass('active');
@@ -22,7 +22,6 @@
       h1Element.textContent = selectedProductText;
       document.querySelector('#product_sell_product_id').value = $(this).data('product-id');
       calculateSalePrice();
-
 		});
 
     function calculateSalePrice(){
