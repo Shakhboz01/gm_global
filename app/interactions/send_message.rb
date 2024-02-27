@@ -5,6 +5,7 @@ class SendMessage < ActiveInteraction::Base
   string :chat, default: 'tech'
 
   def execute
+    return
     token = ENV["TELEGRAM_TOKEN"]
     bot = Telegram::Bot::Client.new(token)
     chat_id =
