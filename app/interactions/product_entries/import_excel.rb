@@ -13,8 +13,8 @@ module ProductEntries
         row_data = Hash[[header, excel.row(i)].transpose]
         name = row_data.values[0]
         amount = row_data.values[1]
-        buy_price = row_data.values[2]
-        sell_price = row_data.values[3]
+        buy_price = row_data.values[2].gsub(/[[:space:]]/, '').to_f
+        sell_price = row_data.values[3]&.gsub(/[[:space:]]/, '')&.to_f
         next unless name.present? && amount.present? && buy_price.present?
 
         words = name.split
@@ -26,7 +26,7 @@ module ProductEntries
         end
 
         sell_price ||= (buy_price + (buy_price * price_in_percentage / 100))
-        price_in_percentage = (sell_price  * 100 / buy_price) - 100
+        self.price_in_percentage = (sell_price  * 100 / buy_price) - 100
         ProductEntry.create(
           buy_price: buy_price,
           sell_price: sell_price,
