@@ -12,7 +12,7 @@ module DataPopulation
     def create_buyers(data)
       buyer =
         Buyer.create(
-          name: data['buyer_name'],
+          name: data['provider'],
           phone_number: data['phone_number'],
           active: true,
           debt_in_uzs: data['debt_in_uzs'],
