@@ -13,8 +13,8 @@ module ProductEntries
         row_data = Hash[[header, excel.row(i)].transpose]
         name = row_data.values[0]
         amount = row_data.values[1]
-        buy_price = row_data.values[2].gsub(/[[:space:]]/, '').to_f
-        sell_price = row_data.values[3]&.gsub(/[[:space:]]/, '')&.to_f
+        buy_price = row_data.values[2].to_s.gsub(/[[:space:]]/, '').to_f
+        sell_price = row_data.values[3]&.to_s&.gsub(/[[:space:]]/, '')&.to_f
         next unless name.present? && amount.present? && buy_price.present?
 
         words = name.split
