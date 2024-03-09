@@ -62,7 +62,6 @@
       <%= f.input :return, as: :hidden %>
       <%= f.input :amount_sold, as: :hidden %>
       <%= f.input :local_entry, as: :hidden %>
-      <%= f.input :sell_price, label: false, as: :hidden, input_html: {id: 'product_entry_sell_price'} %>
 
       <div class='excel' style='display:none'>
         <%= f.input :excel_data, label: false, as: :file, input_html: { accept: '.xlsx, .xls', placeholder: 'excel import' } %>
@@ -71,12 +70,16 @@
         <%= f.association :product, label: 'Выберите товар', collection: products.order(:name), include_blank: false %>
       </div>
       <div class='row'>
+        <div class='piece-entry col-sm-3'>
+          <%= f.input :amount, label: 'кол', input_html: {value: 1} %>
+        </div>
         <div class='piece-entry col-sm-5'>
-          <%= f.input :amount, label: 'количество (шт.)', input_html: {value: 1} %>
+          <%= f.input :buy_price, label: 'приход', input_html: {id: 'product_entry_buy_price'} %>
         </div>
-        <div class='piece-entry col-sm-7'>
-          <%= f.input :buy_price, label: 'Цена прихода', input_html: {id: 'product_entry_buy_price'} %>
+        <div class='piece-entry col-sm-4'>
+          <%= f.input :sell_price, label: 'продажа', input_html: {id: 'product_entry_sell_price'} %>
         </div>
+
       </div>
       <div class='excel' style='display:none'>
         <%= f.input :price_in_percentage, label: 'Цена продажи в %', input_html: {id: 'product_entry_price_in_percentage', value: defined?(price_in_percentage) ? price_in_percentage : 0} %>

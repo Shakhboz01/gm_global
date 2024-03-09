@@ -14,7 +14,7 @@ class ProductEntry < ApplicationRecord
   validates :sell_price, :buy_price, comparison: { greater_than_or_equal_to: 0 }
   validates_presence_of :buy_price, unless: -> { local_entry }
 
-  before_create :set_currency
+  before_create :set_currency_and_update_product_price
   before_create :proccess_increment
   before_create :set_price_in_percentage
   before_destroy :proccess_decrement
@@ -27,8 +27,9 @@ class ProductEntry < ApplicationRecord
 
   private
 
-  def set_currency
+  def set_currency_and_update_product_price
     self.paid_in_usd = product.price_in_usd
+    product.update(sell_price: sell_price, buy_price: buy_price)
   end
 
   def set_price_in_percentage
