@@ -45,8 +45,9 @@
 
       products.forEach(function(product) {
         const productName = product.dataset.productName.toLowerCase();
+        const productCode = product.dataset.productCode.toLowerCase();
 
-        if (productName.includes(searchTerm)) {
+        if (productName.includes(searchTerm) || productCode.includes(searchTerm)) {
           product.style.display = 'block'; // Show the product
         } else {
           product.style.display = 'none'; // Hide the product
@@ -95,7 +96,7 @@
 
 
 <% @products.each do |product| %>
-  <p data-product-name="<%= product.name %>" data-product-id="<%= product.id %>"  data-product-remaining="<%= product.initial_remaining %>" class='product_list'>
+  <p data-product-code="<%= product.code %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>"  data-product-remaining="<%= product.initial_remaining %>" class='product_list'>
     <%= product.name %>
   </p>
 <% end %>
