@@ -26,7 +26,7 @@ module ProductEntries
         end
 
         sell_price ||= (buy_price + (buy_price * price_in_percentage / 100))
-        self.price_in_percentage = (sell_price  * 100 / buy_price) - 100
+        in_percentage = (sell_price  * 100 / buy_price) - 100
         ProductEntry.create(
           buy_price: buy_price,
           sell_price: sell_price,
@@ -34,7 +34,7 @@ module ProductEntries
           amount: amount,
           storage_id: storage_id,
           delivery_from_counterparty_id: delivery_from_counterparty_id,
-          price_in_percentage: price_in_percentage
+          price_in_percentage: in_percentage
         )
       end
     end
