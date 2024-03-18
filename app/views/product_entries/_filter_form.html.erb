@@ -13,7 +13,7 @@
         </div>
         <div class="form-group col-xs-12 col-sm-2">
           <%= f.label :storage_id_eq, 'склад:', class: 'control-label' %>
-          <%= f.select :storage_id_eq, Storage.pluck(:name, :id), { include_blank: true }, class: 'form-control' %>
+          <%= f.select :storage_id_eq, Storage.all.order(:name).pluck(:name, :id), { include_blank: true }, class: 'form-control' %>
         </div>
         <div class="form-group col-xs-12 col-sm-2">
           <%= f.label :created_at_gteq, 'Дата от:', class: 'control-label' %>

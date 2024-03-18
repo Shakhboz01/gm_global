@@ -29,7 +29,7 @@ class ProductEntry < ApplicationRecord
 
   def set_currency_and_update_product_price
     self.paid_in_usd = product.price_in_usd
-    product.update(sell_price: sell_price, buy_price: buy_price)
+    product.update(price_in_usd: paid_in_usd, sell_price: sell_price, buy_price: buy_price)
   end
 
   def set_price_in_percentage
