@@ -14,11 +14,11 @@ class ProductEntry < ApplicationRecord
   validates :sell_price, :buy_price, comparison: { greater_than_or_equal_to: 0 }
   validates_presence_of :buy_price, unless: -> { local_entry }
 
-  before_create :set_currency_and_update_product_price
   before_create :proccess_increment
   before_create :set_price_in_percentage
   before_destroy :proccess_decrement
   before_create :update_delivery_currency
+  before_save :update_product_price
   before_update :set_price_in_percentage
   after_create :update_delivery_category
 
@@ -27,16 +27,12 @@ class ProductEntry < ApplicationRecord
 
   private
 
-  def set_currency_and_update_product_price
-    self.paid_in_usd = product.price_in_usd
-    product.update(price_in_usd: paid_in_usd, sell_price: sell_price, buy_price: buy_price)
-  end
-
   def set_price_in_percentage
     return if new_record? && !price_in_percentage.nil?
 
     price_in_usd = product.price_in_usd
     product_sell_price = product.sell_price
+    rate = CurrencyRate.last.rate
     if price_in_usd && !paid_in_usd
       product_buy_price = buy_price / rate
     elsif !price_in_usd && paid_in_usd
@@ -70,14 +66,7 @@ class ProductEntry < ApplicationRecord
     delivery_from_counterparty.update(product_category_id: product.product_category_id)
   end
 
-  def change_buy_price
-    return if paid_in_usd == paid_in_usd_was
-
-    rate = CurrencyRate.last.rate
-    if paid_in_usd_was == false && paid_in_usd == true
-      self.buy_price = buy_price / rate
-    elsif paid_in_usd_was == true && paid_in_usd == false
-      self.buy_price = buy_price * rate
-    end
+  def update_product_price
+    product.update(price_in_usd: paid_in_usd, buy_price: buy_price, sell_price: sell_price)
   end
 end
