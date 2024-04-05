@@ -1,5 +1,5 @@
 <%- headers = ['Tovar', 'Ostatkasi', 'Narxi'] -%>
 <%= CSV.generate_line(headers).strip %>
-<%- @products.each do |product| -%>
-  <%= CSV.generate_line([Translit.convert(product.name, :english), product.initial_remaining, product.sell_price]).strip %>
+<%- @all_products.each do |product| -%>
+  <%= CSV.generate_line([Translit.convert(product.name, :english).gsub(/[^0-9a-zA-Z]/, ' '), product.initial_remaining.to_s, product.sell_price.to_s], encoding: 'UTF-8').strip %>
 <%- end -%>

@@ -2,7 +2,7 @@
   <%= render 'product_categories/categories', product_categories: @product_categories %>
   <div class='col-sm-10'>
     <%= render 'filter_form', url: request.path, q: @q %>
-    <%= link_to 'Экспорт в Excel', products_url(q: params.dig(:q)&.permit!, format: :csv) %>
+    <%= link_to 'Экспорт в Excel', products_url(q: params.dig(:q)&.permit!, format: :csv), class: 'btn btn-secondary' %>
     <%= render 'products', products: @products, q: @q %>
   </div>
 </div>
