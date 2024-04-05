@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.7"
+ruby "3.0.6"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
@@ -58,6 +58,7 @@ gem 'figaro'
 gem 'whenever'
 gem 'roo'
 gem 'receipts'
+gem 'translit'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

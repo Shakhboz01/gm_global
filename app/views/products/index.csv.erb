@@ -1,0 +1,5 @@
+<%- headers = ['Tovar', 'Ostatkasi', 'Narxi'] -%>
+<%= CSV.generate_line(headers).strip %>
+<%- @products.each do |product| -%>
+  <%= CSV.generate_line([Translit.convert(product.name, :english), product.initial_remaining, product.sell_price]).strip %>
+<%- end -%>

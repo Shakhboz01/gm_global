@@ -1,3 +1,5 @@
+require 'csv'
+
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ toggle_active show edit update destroy calculate_product_remaining]
 
@@ -6,6 +8,14 @@ class ProductsController < ApplicationController
     @q = Product.ransack(params[:q])
     @products = @q.result.order(active: :desc).order(name: :asc).page(params[:page]).per(70)
     @product_categories = ProductCategory.all
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = "attachment; filename=leads.csv"
+      end
+    end
   end
 
   # GET /products/1 or /products/1.json
@@ -49,7 +59,6 @@ class ProductsController < ApplicationController
       end
     end
   end
-  Product.where('buy_price > ?', 2000).update_all(price_in_usd: false)
 
   # DELETE /products/1 or /products/1.json
   def destroy
