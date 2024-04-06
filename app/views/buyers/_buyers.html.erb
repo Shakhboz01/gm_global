@@ -30,7 +30,7 @@
           <td><%= buyer.comment %></td>
           <td><%= strf_datetime(buyer.created_at) %></td>
           <td>
-            <%= clink_to 'Посмотреть история оказания услуги', sales_path, 'fa-history' %>
+            <%= clink_to 'Посмотреть история оказания услуги', sales_path(q: {buyer_id_eq: buyer.id}), 'fa-history' %>
             <%= clink_to 'Редактировать', edit_buyer_path(buyer), 'fa-edit' %>
             <% if buyer.active %>
               <%= clink_to 'Деактивировать', toggle_active_buyer_path(buyer), 'fa-ban', :post %>
