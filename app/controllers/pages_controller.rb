@@ -113,8 +113,8 @@ class PagesController < ApplicationController
     @sales_in_usd = sales.price_in_usd.sum(:total_paid)
     @sales_in_uzs = sales.price_in_uzs.sum(:total_paid)
 
-    average_price_in_percentage_in_usd = product_entries.paid_in_usd.average(:price_in_percentage) || 7
-    average_price_in_percentage_in_uzs = product_entries.paid_in_uzs.average(:price_in_percentage) || 7
+    average_price_in_percentage_in_usd = 7
+    average_price_in_percentage_in_uzs = 7
     @profit_from_sale_in_usd =  (@sales_in_usd  * average_price_in_percentage_in_usd / 100).to_f
     @profit_from_sale_in_uzs = (@sales_in_uzs  * average_price_in_percentage_in_uzs / 100).to_f
 
