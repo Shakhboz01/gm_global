@@ -7,3 +7,4 @@ class ExpenditurePolicy < ApplicationPolicy
     user_is_accaontant?
   end
 end
+
